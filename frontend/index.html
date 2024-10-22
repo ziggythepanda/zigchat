@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Creation</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        #message { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Create an Account</h1>
+    <form id="accountForm">
+        <input type="text" id="walletAddress" placeholder="Injective Wallet Address" required>
+        <button type="submit">Submit</button>
+    </form>
+    <div id="message"></div>
+    
+    <script>
+        document.getElementById('accountForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const walletAddress = document.getElementById('walletAddress').value;
+
+            try {
+                const response = await fetch('https://your-backend-app.herokuapp.com/api/create-account', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ walletAddress })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const result = await response.json();
+                document.getElementById('message').innerText = result.message;
+            } catch (error) {
+                document.getElementById('message').innerText = 'Error: ' + error.message;
+            }
+        });
+    </script>
+</body>
+</html>
