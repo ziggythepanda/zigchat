@@ -21,7 +21,7 @@
             const username = document.getElementById('username').value;
 
             try {
-                const response = await fetch('http://localhost:3000/api/create-username', { // Update this URL when deployed
+                const response = await fetch('https://accountcreation-1bd460654ee8.herokuapp.com/api/create-username', { // Update this URL when deployed
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
