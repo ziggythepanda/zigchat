@@ -3,32 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Creation</title>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        #message { margin-top: 20px; }
-    </style>
+    <title>Create Username</title>
 </head>
 <body>
-    <h1>Create an Account</h1>
-    <form id="accountForm">
-        <input type="text" id="walletAddress" placeholder="Injective Wallet Address" required>
+    <h1>Create a Username</h1>
+    <form id="usernameForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
         <button type="submit">Submit</button>
     </form>
-    <div id="message"></div>
-    
+    <p id="message"></p>
+
     <script>
-        document.getElementById('accountForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const walletAddress = document.getElementById('walletAddress').value;
+        document.getElementById('usernameForm').addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent the default form submission
+            
+            const username = document.getElementById('username').value;
 
             try {
-                const response = await fetch('https://accountcreation-1bd460654ee8.herokuapp.com/api/create-account', {
+                const response = await fetch('http://localhost:3000/api/create-username', { // Update this URL when deployed
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ walletAddress })
+                    body: JSON.stringify({ username })
                 });
 
                 if (!response.ok) {
